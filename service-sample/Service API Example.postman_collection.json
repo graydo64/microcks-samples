@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "be3f621e-5971-40b3-bb95-4bac494ec08b",
+		"name": "Service API Example",
+		"description": "version=1.0.0 \n\nThis is an **example** API to demonstrate features of OpenAPI specification\n# Introduction\nThis API definition is intended to to be a good starting point for describing your API in \n[OpenAPI/Swagger format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).\nIt also demonstrates features of [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool and \n[Redoc](https://github.com/Redocly/Redoc) documentation engine. So beyond the standard OpenAPI syntax we use a few \n[vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).\n\n# OpenAPI Specification\nThe goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which\nallows both humans and computers to discover and understand the capabilities of the service without access to source\ncode, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can \nunderstand and interact with the remote service with a minimal amount of implementation logic. Similar to what\ninterfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.\n\n\nContact Support:\n Email: graeme.wilson@zeninternet.co.uk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Get a service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"services",
+								"{id}"
+							]
+						},
+						"description": "Return a service object by Id."
+					},
+					"response": [
+						{
+							"name": "GetService",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/services/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"services",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\"@type\": \"zen.service\", \"id\": \"1\", \"href\": \"http://services/1\", \"startDate\": \"2021-07-21T12:56:00Z\", \"name\": \"test service\"}"
+						},
+						{
+							"name": "GetServiceThree",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/services/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"services",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\"@type\": \"zen.service\", \"id\": \"3\", \"href\": \"http://services/3\", \"startDate\": \"2021-07-21T11:12:00Z\", \"name\": \"test service three\"}"
+						},
+						{
+							"name": "GetServiceFour",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/services/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"services",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\"@type\": \"zen.service\", \"id\": \"4\", \"href\": \"http://services/4\", \"startDate\": \"2021-07-21T11:12:00Z\", \"name\": \"test service four\"}"
+						},
+						{
+							"name": "GetBroadbandService",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/services/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"services",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\"@type\": \"zen.service.broadband\", \"id\": \"2\", \"href\": \"http://services/2\", \"startDate\": \"2021-06-12T12:56:00Z\", \"name\": \"test broadband service\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Monitoring",
+			"item": [
+				{
+					"name": "Perform a Healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/healthcheck",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						},
+						"description": "A simple implementation may just return OK.  More complex implementations may wish to check the status of dependencies."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/healthcheck",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"healthcheck"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

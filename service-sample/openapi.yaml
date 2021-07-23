@@ -1,0 +1,195 @@
+# This is an **example** API to demonstrate features of OpenAPI specification.
+# It doesn't cover all OpenAPI features. For more full example check out: https://github.com/APIs-guru/petstore_extended
+
+openapi: 3.0.2
+info:
+  version: '1.0.0' # Your API version
+  # It can be any string but it is better to use semantic versioning: http://semver.org/
+  # Warning: OpenAPI requires the version to be a string, but without quotation marks YAML can recognize it as a number.
+  
+  title: Service API Example # Replace with your API title
+  # Keep it simple. Don't add "API" or version at the end of the string.
+
+  contact:
+    email: graemevwilson@outlook.com # [Optional] Replace with your contact email
+    url: 'https://github.com/graydo64' # [Optional] Replace with link to your contact form
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  
+  # Describe your API here, you can use GFM (https://guides.github.com/features/mastering-markdown) here
+  description: |
+    This is an **example** API to demonstrate features of OpenAPI specification
+    # Introduction
+    This API definition is intended to to be a good starting point for describing your API in 
+    [OpenAPI/Swagger format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+    It also demonstrates features of [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool and 
+    [Redoc](https://github.com/Redocly/Redoc) documentation engine. So beyond the standard OpenAPI syntax we use a few 
+    [vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
+
+    # OpenAPI Specification
+    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
+    allows both humans and computers to discover and understand the capabilities of the service without access to source
+    code, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can 
+    understand and interact with the remote service with a minimal amount of implementation logic. Similar to what
+    interfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.
+externalDocs:
+  description: Find out how to create a GitHub repo for your OpenAPI definition.
+  url: 'https://github.com/Rebilly/generator-openapi-repo'
+
+# A list of tags used by the definition with additional metadata.
+# The order of the tags can be used to reflect on their order by the parsing tools.
+tags:
+  - name: Services
+    description: Services testing
+  - name: Monitoring
+    description: Operations used to determine service status or metadata.  These operations are not part of the business function provided by the API but are intended for use by operation support teams for issue resolution.
+servers:
+  - url: 'http://localhost:8080'
+security: 
+  - OAuth2ClientCredentials: []
+
+# Holds the relative paths to the individual endpoints. The path is appended to the
+# basePath in order to construct the full URL. 
+paths:
+  '/services/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        examples:
+          simple-service:
+            value: '1'
+          broadband-service:
+            value: '2'
+    get:
+      tags: 
+        - Services
+      summary: Get a service
+      description: Return a service object by Id.
+      operationId: getService
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                # discriminator: 
+                #   propertyName: '@type'
+                #   mapping:
+                #     zen.service: '#/components/schemas/Service'
+                #     zen.service.broadband: '#/components/schemas/BroadbandService'
+                anyOf:
+                  - $ref: '#/components/schemas/Service'
+                  - $ref: '#/components/schemas/BroadbandService'
+              examples:
+                simple-service:
+                  value:
+                    '@type': 'zen.service'
+                    id: '1'
+                    href: 'http://services/1'
+                    startDate: '2021-07-01T10:00:00Z'
+                    name: 'Sample customer service'
+                broadband-service:
+                  value:
+                    '@type': 'zen.service.broadband'
+                    id: '2'
+                    href: 'http://services/2'
+                    startDate: '2021-07-01T10:00:00Z'
+                    name: 'Sample broadband service'    
+                    speed: '19200'                
+  '/healthcheck': 
+    get:
+      tags:
+        - Monitoring
+      summary: Perform a Healthcheck
+      description: A simple implementation may just return OK.  More complex implementations may wish to check the status of dependencies.
+      operationId: healthcheck
+      responses:
+        '200':
+          description: OK
+# An object to hold reusable parts that can be used across the definition
+components:
+  securitySchemes:
+    OAuth2ClientCredentials:
+      type: oauth2
+      description: Clients should authenticate using a bearer token obtained from the OAuth2.0 client credentials flow.
+      flows: 
+        clientCredentials: 
+          tokenUrl: https://identity.zen.co.uk/connect/token
+          scopes: {}
+  responses:
+    not-found:
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            Type: https://zen.co.uk/problem-details/404
+            Title: Not Found
+            Status: 404
+            Detail: The specified voice account could not be found.  Check that you have used the correct telephone number. 
+    conflict:
+      description: Conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            Type: https://zen.co.uk/problem-details/409
+            Title: Conflict
+            Status: 409
+            Detail: An attempt to create a new Voice account was made with the telephone number of an existing account.
+  schemas:
+    ProblemDetails:
+      description: Implementation of the Problem Details object from [RFC7807](https://tools.ietf.org/html/rfc7807)
+      type: object
+      properties:
+        Type:
+          type: string
+          format: uri
+          example: 'https://zen.co.uk/problem-details/401'
+        Title:
+          type: string
+          example: Unauthorized
+        Status:
+          type: integer
+          format: int32
+          example: 401
+    ServiceBase:
+      description: Base Service
+      type: object
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          zen.service: '#/components/schemas/Service'
+          zen.service.broadband: '#/components/schemas/BroadbandService'
+      properties:
+        id:
+          type: string
+        href:
+          type: string
+          format: uri
+        startDate:
+          type: string
+          format: date-time
+        name:
+          type: string
+        '@type':
+          type: string
+    Service:
+      description: Basic Service
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ServiceBase'
+    BroadbandService:
+      description: Broadband Service
+      allOf:
+        - $ref: '#/components/schemas/ServiceBase'
+      type: object
+      properties:
+        speed: 
+          type: string
