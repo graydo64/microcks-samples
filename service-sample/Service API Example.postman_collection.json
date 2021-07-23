@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "be3f621e-5971-40b3-bb95-4bac494ec08b",
+		"_postman_id": "2bfd6b26-32f0-4bd9-ba85-23b5e501ec3c",
 		"name": "Service API Example",
 		"description": "version=1.0.0 \n\nThis is an **example** API to demonstrate features of OpenAPI specification\n# Introduction\nThis API definition is intended to to be a good starting point for describing your API in \n[OpenAPI/Swagger format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).\nIt also demonstrates features of [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool and \n[Redoc](https://github.com/Redocly/Redoc) documentation engine. So beyond the standard OpenAPI syntax we use a few \n[vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).\n\n# OpenAPI Specification\nThe goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which\nallows both humans and computers to discover and understand the capabilities of the service without access to source\ncode, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can \nunderstand and interact with the remote service with a minimal amount of implementation logic. Similar to what\ninterfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.\n\n\nContact Support:\n Email: graeme.wilson@zeninternet.co.uk",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -51,8 +51,8 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\"@type\": \"zen.service\", \"id\": \"1\", \"href\": \"http://services/1\", \"startDate\": \"2021-07-21T12:56:00Z\", \"name\": \"test service\"}"
 						},
@@ -80,8 +80,8 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\"@type\": \"zen.service\", \"id\": \"3\", \"href\": \"http://services/3\", \"startDate\": \"2021-07-21T11:12:00Z\", \"name\": \"test service three\"}"
 						},
@@ -109,8 +109,8 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\"@type\": \"zen.service\", \"id\": \"4\", \"href\": \"http://services/4\", \"startDate\": \"2021-07-21T11:12:00Z\", \"name\": \"test service four\"}"
 						},
@@ -138,8 +138,8 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\"@type\": \"zen.service.broadband\", \"id\": \"2\", \"href\": \"http://services/2\", \"startDate\": \"2021-06-12T12:56:00Z\", \"name\": \"test broadband service\"}"
 						}
